@@ -29,5 +29,5 @@ somewhere else, just edit the environment variable in the file.
 
 ## License
 
-`pysports` is implemented according to the BSD 3-Clause License.  You can find
-a copy in the LICENSE file.
+`pdf_converter` is implemented according to the BSD 3-Clause License.  You can
+find a copy in the LICENSE file.

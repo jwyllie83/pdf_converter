@@ -1,0 +1,24 @@
+#!/bin/bash
+# Usage:
+# ./pdf2jpg_converter list_of_files_somewhere
+
+COMPLETEDDIR="./completed"
+mkdir -p "${COMPLETEDDIR}"
+
+for F in "$@"; do
+	# Figure out the basename from the original
+	BF="$(basename "${F}")"
+	BF="$(echo "${BF}" | sed -re 's/\.pdf$//' | sed -re 's/[xX][0-9]+$//')"
+
+	# Figure out the final location name
+	TOSPOT="${COMPLETEDDIR}/${BF}"
+
+	# Convert away...
+	echo "${F} to ${TOSPOT}..."
+	pdfimages -all "${F}" "${TOSPOT}"
+
+	# Determine if we have to suppress the final -000...
+	if [[ "$(pdfimages -list "${F}" | wc -l)" = "3" ]]; then
+		mv "${TOSPOT}-000.jpg" "${TOSPOT}.jpg"
+	fi
+done
